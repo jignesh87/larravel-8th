@@ -45,8 +45,8 @@ class DocumentController extends Controller
     }
 
     public function getDocuments(Request $request)
-    {
-    	$documents = Document::all()->where('user_id',$request->user_id);
+    {   //echo "<pre>";print_r($request->user_id);die;
+    	$documents = Document::where('user_id',$request->user_id)->get();
         return response()->json(["status" => "success", "message" => "Success!", "data" => $documents]);
     }
 }

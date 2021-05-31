@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\BrandController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +41,6 @@ Route::middleware('auth:api')->group(function() {
     Route::resource('posts', PostController::class)->except(['index']);
     Route::resource('comments', CommentController::class);
     Route::post("documents", [DocumentController::class, "getDocuments"]);
+    Route::resource('brands', BrandController::class));
 
 });
