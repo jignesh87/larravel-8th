@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\Manufacturer;
 
 class ManufacturerController extends Controller
 {
@@ -29,10 +30,11 @@ class ManufacturerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'alias' => 'required|min:3',
-            'name' => 'required|min:100',
-            'status' => 'required|min:100',
+            'name' => 'required|min:6'
         ]);
 
+        
+        $request->merge(['updated_by' => 1 ]);
         if($validator->fails()) {
             return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
         }
