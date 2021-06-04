@@ -13,17 +13,16 @@ class CreateBrandsTable extends Migration
      */
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreignId('manufacturer_id')->nullable()->constrained('manufacturers');
+        Schema::create('sz_brands', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('manufacturer_id')->nullable()->constrained('sz_manufacturers');
             $table->text('alias');
             $table->text('brand_name');
             $table->longtext('narrative');
             $table->enum('status', ['active', 'inactive', 'perged']);
-            $table->integer('quick_book_brand_id')->unsigned()->nullable();
+            $table->integer('quickbook_brand_id')->unsigned()->nullable();
             $table->foreignId('updated_by')->constrained('users');
-            $table->timestamp('updated_date', $precision = 0);
-            $table->timestamps();
+            $table->timestamp('updated_date');
         });
     }
 
@@ -34,6 +33,6 @@ class CreateBrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands');
+        Schema::dropIfExists('sz_brands');
     }
 }
