@@ -9,6 +9,12 @@ class Manufacturer extends Model
 {
     use HasFactory;
 
+    /**Override tablename from manufacturers to sz_...*/
+    protected $table  = 'sz_manufacturers';
+
+    /** Default timestamp column not used */
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,6 +23,8 @@ class Manufacturer extends Model
     protected $fillable = [
         'alias',
         'name',
-        'status'
+        'quickbook_manufacturer_id',
+        'status',
+        'updated_by'
     ];
 }
