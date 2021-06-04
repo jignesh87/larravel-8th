@@ -41,6 +41,6 @@ Route::middleware('auth:api')->group(function() {
     Route::resource('posts', PostController::class)->except(['index']);
     Route::resource('comments', CommentController::class);
     Route::post("documents", [DocumentController::class, "getDocuments"]);
-    Route::resource('brands', BrandController::class));
+    Route::resource('brands', BrandController::class)->except(['create']);
 
 });

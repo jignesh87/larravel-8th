@@ -18,16 +18,7 @@ class BrandController extends Controller
         return response()->json(["status" => "success", "message" => "Success!", "data" => $brands]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -37,20 +28,17 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'short_name' => 'required|min:3',
-            'full_name' => 'required|min:3',
+            'alias' => 'required|min:3',
+            'brand_name' => 'required|min:100',
             'narrative' => 'required|min:100',
+            'status' => 'required|min:100',
         ]);
 
         if($validator->fails()) {
             return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
         }
 
-        $brand = Post::create([
-            'short_name' => $request->short_name,
-            'full_name' => $request->full_name,
-            'narrative' => $request->narrative,
-        ]);
+        $brand = Brand::create($request->all());
 
         if($brand)
             return response()->json(["status" => "success", "message" => "Success! brand created", "data" => $brand]);
