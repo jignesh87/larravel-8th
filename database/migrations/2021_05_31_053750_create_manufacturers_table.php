@@ -13,15 +13,15 @@ class CreateManufacturersTable extends Migration
      */
     public function up()
     {
-        Schema::create('manufacturers', function (Blueprint $table) {
+        Schema::create('sz_manufacturers', function (Blueprint $table) {
             $table->id();
             $table->text('alias');
             $table->string('name');
-            $table->string('quickbook_vendor_id');
+            $table->string('quickbook_manufacturer_id');
             $table->enum('status', ['active', 'inactive', 'perged']);
-            $table->timestamp('updated_date', $precision = 0);
             $table->foreignId('updated_by')->constrained('users');
-
+            $table->timestamp('updated_date');
+            
         });
     }
 
@@ -32,6 +32,6 @@ class CreateManufacturersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manufacturers');
+        Schema::dropIfExists('sz_manufacturers');
     }
 }
